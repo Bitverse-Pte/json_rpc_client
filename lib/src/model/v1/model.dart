@@ -1,3 +1,5 @@
+import 'package:json_rpc_client/src/common/parse_util.dart';
+
 class JRPC1Request {
   final String jsonrpc;
   final String id;
@@ -25,7 +27,7 @@ class JRPC1Request {
 
   static JRPC1Request fromMap(Map<String, dynamic> map) {
     return JRPC1Request(
-        id: map['id'],
+        id: parseString(map['id']),
         method: map['method'],
         jsonrpc: map['jsonrpc'],
         params: map['params']);
@@ -56,7 +58,7 @@ class JRPC1Response {
 
   static JRPC1Response fromMap(Map<String, dynamic> map) => JRPC1Response(
         jsonrpc: map['jsonrpc'] ?? '1.0',
-        id: map['id'],
+        id: parseString(map['id']),
         result: map['result'],
         error: map['error'],
       );
